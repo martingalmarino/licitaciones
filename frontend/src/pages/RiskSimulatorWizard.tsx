@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { createRiskAssessment, RiskAnswers } from '../api/riskClient'
+import { computeRiskLocally, saveDemoAssessment } from '../riskScoring'
 
 const EMPTY_ANSWERS: RiskAnswers = {
   institution_type: '',
@@ -24,7 +25,6 @@ export default function RiskSimulatorWizard() {
   const [step, setStep] = useState(1)
   const [answers, setAnswers] = useState<RiskAnswers>(EMPTY_ANSWERS)
   const [loading, setLoading] = useState(false)
-  const [error, setError] = useState<string | null>(null)
   const navigate = useNavigate()
 
   const update = (key: keyof RiskAnswers, value: string) => {
@@ -33,12 +33,20 @@ export default function RiskSimulatorWizard() {
 
   const handleSubmit = async () => {
     setLoading(true)
-    setError(null)
     try {
       const result = await createRiskAssessment(answers)
       navigate(`/risk-simulator/result/${result.id}`)
-    } catch (e) {
-      setError('Error al calcular. Verifique que el backend esté conectado.')
+    } catch {
+      const computed = computeRiskLocally(answers)
+      const demoId = `demo-${Date.now()}`
+      saveDemoAssessment(demoId, {
+        id: demoId,
+        created_at: new Date().toISOString(),
+        ...answers,
+        ...computed,
+        answers
+      })
+      navigate(`/risk-simulator/result/${demoId}`)
     } finally {
       setLoading(false)
     }
@@ -97,11 +105,11 @@ export default function RiskSimulatorWizard() {
               <label>Monto estimado</label>
               <select value={answers.amount_range} onChange={(e) => update('amount_range', e.target.value)}>
                 <option value="">Seleccionar...</option>
-                <option>&lt; ARS 20M</option>
-                <option>ARS 20–100M</option>
-                <option>ARS 100–300M</option>
-                <option>&gt; ARS 300M</option>
-                <option>No informado</option>
+                <option value="< ARS 20M">&lt; ARS 20M</option>
+                <option value="ARS 20–100M">ARS 20–100M</option>
+                <option value="ARS 100–300M">ARS 100–300M</option>
+                <option value="> ARS 300M">&gt; ARS 300M</option>
+                <option value="No informado">No informado</option>
               </select>
             </div>
             <div className="form-group">
@@ -227,7 +235,6 @@ export default function RiskSimulatorWizard() {
           </div>
         )}
 
-        {error && <div className="demo-banner" style={{ marginTop: 15 }}>{error}</div>}
 
         <div className="wizard-actions" style={{ display: 'flex', gap: 15, marginTop: 30 }}>
           {step > 1 && (

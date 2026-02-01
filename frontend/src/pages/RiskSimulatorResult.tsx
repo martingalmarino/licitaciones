@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { getRiskAssessment, downloadRiskPdf, RiskAssessment } from '../api/riskClient'
+import { getDemoAssessment } from '../riskScoring'
 
 const MOD_CAPS: Record<string, number> = { plazos: 20, logistica: 25, regulatorio: 20, administrativo: 20, financiero: 15 }
 const MOD_LABELS: Record<string, string> = {
@@ -21,14 +22,26 @@ export default function RiskSimulatorResult() {
 
   useEffect(() => {
     if (!id) return
+    if (id.startsWith('demo-')) {
+      const demo = getDemoAssessment(id) as RiskAssessment | null
+      setAssessment(demo)
+      setLoading(false)
+      return
+    }
     getRiskAssessment(id)
       .then(setAssessment)
       .catch(() => alert('Error al cargar evaluación'))
       .finally(() => setLoading(false))
   }, [id])
 
+  const isDemo = id?.startsWith('demo-')
+
   const handleDownloadPdf = async () => {
     if (!id) return
+    if (isDemo) {
+      alert('En modo demo el PDF requiere backend conectado.')
+      return
+    }
     setPdfLoading(true)
     try {
       const blob = await downloadRiskPdf(id)
@@ -62,6 +75,11 @@ export default function RiskSimulatorResult() {
         <button className="btn btn-secondary" onClick={() => navigate('/risk-simulator')} style={{ marginBottom: 20 }}>
           ← Volver
         </button>
+        {isDemo && (
+          <div className="demo-banner" style={{ marginBottom: 20 }}>
+            Modo demo: resultado calculado localmente. Conecte el backend para guardar y descargar PDF.
+          </div>
+        )}
 
         <div className="risk-score-panel" style={{ background: 'white', padding: 30, borderRadius: 12, boxShadow: '0 2px 8px rgba(0,0,0,0.08)', marginBottom: 25 }}>
           <h2 style={{ marginBottom: 15, color: 'var(--cofarsur-blue-dark)' }}>Riesgo Total</h2>
@@ -122,9 +140,10 @@ export default function RiskSimulatorResult() {
           <button
             className="btn btn-primary"
             onClick={handleDownloadPdf}
-            disabled={pdfLoading}
+            disabled={pdfLoading || isDemo}
+            title={isDemo ? 'Requiere backend para PDF' : ''}
           >
-            {pdfLoading ? 'Generando...' : 'Descargar informe PDF'}
+            {pdfLoading ? 'Generando...' : isDemo ? 'PDF (requiere backend)' : 'Descargar informe PDF'}
           </button>
           <button className="btn btn-secondary" onClick={() => navigate('/risk-simulator/history')}>
             Ver historial

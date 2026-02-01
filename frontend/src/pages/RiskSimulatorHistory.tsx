@@ -1,17 +1,24 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { listRiskAssessments, RiskAssessmentSummary } from '../api/riskClient'
+import { listDemoAssessments } from '../riskScoring'
 
 export default function RiskSimulatorHistory() {
   const [items, setItems] = useState<RiskAssessmentSummary[]>([])
   const [loading, setLoading] = useState(true)
-  const [error, setError] = useState<string | null>(null)
+  const [usingDemo, setUsingDemo] = useState(false)
   const navigate = useNavigate()
 
   useEffect(() => {
     listRiskAssessments()
-      .then((r) => setItems(r.items))
-      .catch(() => setError('Error al cargar historial. Verifique el backend.'))
+      .then((r) => {
+        setItems(r.items)
+        setUsingDemo(false)
+      })
+      .catch(() => {
+        setItems(listDemoAssessments())
+        setUsingDemo(true)
+      })
       .finally(() => setLoading(false))
   }, [])
 
@@ -29,9 +36,13 @@ export default function RiskSimulatorHistory() {
         </button>
         <h2 style={{ marginBottom: 25, color: 'var(--cofarsur-blue-dark)' }}>Historial de evaluaciones</h2>
 
-        {error && <div className="demo-banner">{error}</div>}
+        {usingDemo && (
+          <div className="demo-banner">
+            Mostrando evaluaciones guardadas localmente (modo demo). Conecte el backend para sincronizar.
+          </div>
+        )}
 
-        {items.length === 0 && !error && (
+        {items.length === 0 && (
           <div className="empty-state">No hay evaluaciones aún. Inicie una nueva evaluación.</div>
         )}
 
