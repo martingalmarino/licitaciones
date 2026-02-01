@@ -1,5 +1,14 @@
 import type { MonthlyData } from '../../utils/performance'
 
+/** Altura mínima (%) para barras con valor > 0, para que meses con pocos datos se vean bien. */
+const MIN_BAR_PERCENT = 8
+
+function barHeight(value: number, maxVal: number): string {
+  if (value === 0) return '0'
+  const pct = (value / maxVal) * 100
+  return `${Math.max(pct, MIN_BAR_PERCENT)}%`
+}
+
 interface MonthlyTrendChartProps {
   data: MonthlyData[]
 }
@@ -19,17 +28,17 @@ export default function MonthlyTrendChart({ data }: MonthlyTrendChartProps) {
             <div className="monthly-bars">
               <div
                 className="monthly-bar detectadas"
-                style={{ height: `${(m.detectadas / maxVal) * 100}%` }}
+                style={{ height: barHeight(m.detectadas, maxVal) }}
                 title={`Detectadas: ${m.detectadas}`}
               />
               <div
                 className="monthly-bar presentadas"
-                style={{ height: `${(m.presentadas / maxVal) * 100}%` }}
+                style={{ height: barHeight(m.presentadas, maxVal) }}
                 title={`Presentadas: ${m.presentadas}`}
               />
               <div
                 className="monthly-bar ganadas"
-                style={{ height: `${(m.ganadas / maxVal) * 100}%` }}
+                style={{ height: barHeight(m.ganadas, maxVal) }}
                 title={`Ganadas: ${m.ganadas}`}
               />
             </div>
