@@ -54,10 +54,24 @@ export default function RiskSimulatorWizard() {
 
   return (
     <div className="app-container">
-      <div className="risk-wizard" style={{ maxWidth: 600, margin: '0 auto', padding: 30 }}>
-        <h2 style={{ marginBottom: 20, color: 'var(--cofarsur-blue-dark)' }}>
+      <div style={{ maxWidth: 600, margin: '0 auto', padding: '0 20px' }}>
+        <button className="btn btn-secondary" onClick={() => navigate('/risk-simulator')} style={{ marginBottom: 16 }}>
+          ← Volver
+        </button>
+      </div>
+      <div className="risk-wizard" style={{ maxWidth: 600, margin: '0 auto' }}>
+        <h2 style={{ marginBottom: 4, color: 'var(--cofarsur-blue-dark)' }}>
           Paso {step} de 3
         </h2>
+        <div className="wizard-progress">
+          {[1, 2, 3].map((s) => (
+            <div
+              key={s}
+              className={`wizard-progress-step ${s < step ? 'done' : s === step ? 'active' : ''}`}
+              aria-hidden
+            />
+          ))}
+        </div>
 
         {step === 1 && (
           <div className="wizard-step">
@@ -116,9 +130,9 @@ export default function RiskSimulatorWizard() {
               <label>Días hasta apertura/presentación</label>
               <div className="radio-group">
                 {['<7', '7–14', '15–30', '>30', 'No informado'].map((opt) => (
-                  <label key={opt} style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 6 }}>
+                  <label key={opt} className="radio-option">
                     <input type="radio" name="days" value={opt} checked={answers.days_to_open_range === opt} onChange={(e) => update('days_to_open_range', e.target.value)} />
-                    {opt}
+                    <span className="radio-label">{opt === 'No informado' ? opt : `${opt} días`}</span>
                   </label>
                 ))}
               </div>
