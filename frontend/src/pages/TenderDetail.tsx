@@ -1,6 +1,10 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
+import { Link } from 'react-router-dom'
 import { getTender, updateTender, createTenderFolder, Tender, TenderUpdate } from '../api/client'
 import ScoreBreakdown from '../components/ScoreBreakdown'
+import RecommendedItemsPanel from '../components/library/RecommendedItemsPanel'
+import { deriveTenderTags, recommendByTags, getLibraryItemById } from '../utils/library'
+import { getAttachmentsForTender, removeAttachment } from '../utils/localAttachments'
 
 interface TenderDetailProps {
   tenderId: string
@@ -19,7 +23,28 @@ export default function TenderDetail({ tenderId, initialTender, onClose, onUpdat
     owner: initialTender?.owner || '',
     notes: initialTender?.notes || '',
   })
+  const [attachmentsRefresh, setAttachmentsRefresh] = useState(0)
   const isDemoTender = tenderId.startsWith('demo-')
+
+  const libraryRecommendations = useMemo(() => {
+    if (!tender) return []
+    const tags = deriveTenderTags({
+      title: tender.title,
+      description: tender.description,
+      category: tender.category,
+      organization: tender.organization,
+      publish_date: tender.publish_date,
+      open_date: tender.open_date,
+    })
+    if (tags.length === 0) return []
+    const results = recommendByTags(tags, { limit: 3 })
+    return results.map((r) => ({ item: r.item, matchingTags: r.matchingTags }))
+  }, [tender])
+
+  const attachedItems = useMemo(() => {
+    const list = getAttachmentsForTender(tenderId)
+    return list.map((a) => ({ ...a, item: getLibraryItemById(a.itemId) })).filter((a) => a.item)
+  }, [tenderId, attachmentsRefresh])
 
   useEffect(() => {
     if (initialTender && initialTender.id === tenderId) {
@@ -191,6 +216,39 @@ export default function TenderDetail({ tenderId, initialTender, onClose, onUpdat
             </div>
             <ScoreBreakdown breakdown={tender.score_breakdown} />
           </div>
+
+          {libraryRecommendations.length > 0 && (
+            <div className="tender-detail-library-section">
+              <RecommendedItemsPanel
+                title="Recomendado desde Biblioteca"
+                items={libraryRecommendations}
+              />
+            </div>
+          )}
+
+          {attachedItems.length > 0 && (
+            <div className="tender-detail-attachments-section">
+              <h2>Recursos adjuntos</h2>
+              <ul className="tender-attachments-list">
+                {attachedItems.map(({ itemId, item }) => (
+                  <li key={itemId} className="tender-attachment-item">
+                    <Link to={`/library/item/${item!.id}`}>{item!.title}</Link>
+                    <button
+                      type="button"
+                      className="btn btn-small btn-ghost"
+                      onClick={() => {
+                        removeAttachment(tenderId, itemId)
+                        setAttachmentsRefresh((k) => k + 1)
+                      }}
+                      aria-label="Quitar recurso"
+                    >
+                      Quitar
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
         </div>
 
         <div className="tender-detail-sidebar">

@@ -19,6 +19,9 @@ export default function Header() {
           <Link to="/performance" className={loc.pathname === '/performance' ? 'nav-link active' : 'nav-link'}>
             Performance
           </Link>
+          <Link to="/library" className={loc.pathname.startsWith('/library') ? 'nav-link active' : 'nav-link'}>
+            Biblioteca
+          </Link>
           <Link to="/risk-simulator" className={loc.pathname.startsWith('/risk-simulator') ? 'nav-link active' : 'nav-link'}>
             Simulador de Riesgo
           </Link>

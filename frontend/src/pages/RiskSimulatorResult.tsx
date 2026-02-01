@@ -1,7 +1,9 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { getRiskAssessment, downloadRiskPdf, RiskAssessment } from '../api/riskClient'
 import { getDemoAssessment } from '../riskScoring'
+import { riskAnswersToTags, recommendByTags } from '../utils/library'
+import RecommendedItemsPanel from '../components/library/RecommendedItemsPanel'
 
 const MOD_CAPS: Record<string, number> = { plazos: 20, logistica: 25, regulatorio: 20, administrativo: 20, financiero: 15 }
 const MOD_LABELS: Record<string, string> = {
@@ -35,6 +37,17 @@ export default function RiskSimulatorResult() {
   }, [id])
 
   const isDemo = id?.startsWith('demo-')
+
+  const recommendedLibraryItems = useMemo(() => {
+    if (!assessment) return []
+    const answers = (assessment as RiskAssessment & { answers?: Record<string, string> }).answers ?? assessment
+    const tags = riskAnswersToTags(answers as Record<string, string>)
+    if (tags.length === 0) return []
+    const all = recommendByTags(tags, { limit: 10 })
+    const checklists = all.filter((r) => r.item.type === 'CHECKLIST').slice(0, 2)
+    const pliegos = all.filter((r) => r.item.type === 'PLIEGO').slice(0, 1)
+    return [...checklists, ...pliegos].map((r) => ({ item: r.item, matchingTags: r.matchingTags }))
+  }, [assessment])
 
   const handleDownloadPdf = async () => {
     if (!id) return
@@ -135,6 +148,21 @@ export default function RiskSimulatorResult() {
             </label>
           ))}
         </div>
+
+        {recommendedLibraryItems.length > 0 && (
+          <div style={{ background: 'white', padding: 30, borderRadius: 12, boxShadow: '0 2px 8px rgba(0,0,0,0.08)', marginBottom: 25 }}>
+            <RecommendedItemsPanel
+              title="Plantillas recomendadas"
+              items={recommendedLibraryItems}
+              emptyMessage="No hay plantillas recomendadas para esta evaluación."
+            />
+            <div style={{ marginTop: 12, display: 'flex', gap: 10, flexWrap: 'wrap' }}>
+              <button type="button" className="btn btn-secondary" onClick={() => navigate('/library')}>
+                Abrir en Biblioteca
+              </button>
+            </div>
+          </div>
+        )}
 
         <div style={{ display: 'flex', gap: 15, flexWrap: 'wrap' }}>
           <button

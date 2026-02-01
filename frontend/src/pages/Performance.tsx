@@ -1,4 +1,6 @@
 import { useMemo, useState } from 'react'
+import { Link } from 'react-router-dom'
+import { getLibraryItemById } from '../utils/library'
 import { SAMPLE_TENDERS } from '../data/sample_tenders'
 import { SAMPLE_STATUS_EVENTS } from '../data/sample_status_events'
 import {
@@ -22,6 +24,15 @@ import OwnerPerformanceTable from '../components/performance/OwnerPerformanceTab
 
 const PROVINCES = ['Córdoba', 'Buenos Aires', 'Santa Fe', 'Mendoza', 'Tucumán', 'Nacional']
 const OWNERS = ['María', 'Juan', 'Sofía', 'Diego', 'Lucía', 'Carlos', 'Sin asignar']
+
+/** Fricciones recurrentes (demo): título, conteo simulado, ids de ítems de biblioteca */
+const FRICCIONES_DEMO: Array<{ label: string; count: number; itemIds: string[] }> = [
+  { label: 'Documentación alta', count: 24, itemIds: ['checklist-base', 'pliego-compra-centralizada'] },
+  { label: 'Cadena de frío', count: 18, itemIds: ['checklist-cadena-frio'] },
+  { label: 'Garantías', count: 15, itemIds: ['checklist-garantias'] },
+  { label: 'Multisede', count: 12, itemIds: ['checklist-multisede'] },
+  { label: 'ANMAT / trazabilidad', count: 10, itemIds: ['checklist-anmat'] },
+]
 
 export default function Performance() {
   const [filters, setFilters] = useState<PerformanceFilters>({})
@@ -91,6 +102,31 @@ export default function Performance() {
         <section className="perf-section perf-tables">
           <TopOrganizationsTable rows={topOrgs} />
           <OwnerPerformanceTable rows={ownerPerf} />
+        </section>
+
+        <section className="perf-section perf-fricciones">
+          <h3>Fricciones recurrentes (demo)</h3>
+          <p className="perf-fricciones-desc">
+            Temas que más aparecen en procesos. Enlace a recursos de la Biblioteca.
+          </p>
+          <div className="perf-fricciones-list">
+            {FRICCIONES_DEMO.map((f) => (
+              <div key={f.label} className="perf-friccion-card">
+                <span className="perf-friccion-label">{f.label}</span>
+                <span className="perf-friccion-count">{f.count} procesos</span>
+                <div className="perf-friccion-links">
+                  {f.itemIds.map((itemId) => {
+                    const libItem = getLibraryItemById(itemId)
+                    return (
+                      <Link key={itemId} to={`/library/item/${itemId}`} className="perf-friccion-link">
+                        {libItem ? libItem.title : 'Ver recurso'}
+                      </Link>
+                    )
+                  })}
+                </div>
+              </div>
+            ))}
+          </div>
         </section>
 
         <div className="perf-legend">

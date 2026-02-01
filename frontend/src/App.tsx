@@ -6,6 +6,9 @@ import RiskSimulatorWizard from './pages/RiskSimulatorWizard'
 import RiskSimulatorResult from './pages/RiskSimulatorResult'
 import RiskSimulatorHistory from './pages/RiskSimulatorHistory'
 import Performance from './pages/Performance'
+import LibraryHome from './pages/LibraryHome'
+import LibraryList from './pages/LibraryList'
+import LibraryItemDetail from './pages/LibraryItemDetail'
 
 function App() {
   return (
@@ -18,6 +21,10 @@ function App() {
         <Route path="/risk-simulator/result/:id" element={<RiskSimulatorResult />} />
         <Route path="/risk-simulator/history" element={<RiskSimulatorHistory />} />
         <Route path="/performance" element={<Performance />} />
+        <Route path="/library" element={<LibraryHome />} />
+        <Route path="/library/checklists" element={<LibraryList type="CHECKLIST" />} />
+        <Route path="/library/pliegos" element={<LibraryList type="PLIEGO" />} />
+        <Route path="/library/item/:id" element={<LibraryItemDetail />} />
       </Routes>
     </BrowserRouter>
   )
