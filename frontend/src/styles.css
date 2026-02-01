@@ -55,6 +55,8 @@ body {
   display: flex;
   align-items: center;
   gap: 15px;
+  text-decoration: none;
+  color: inherit;
 }
 
 .logo-icon {
@@ -106,6 +108,11 @@ body {
 
 .nav-link:hover {
   color: var(--cofarsur-blue);
+}
+
+.nav-link.active {
+  color: var(--cofarsur-blue);
+  font-weight: 700;
 }
 
 .app-container {
@@ -323,6 +330,11 @@ body {
   border-radius: 6px;
   margin: 15px 0;
   font-size: 0.9rem;
+}
+
+.risk-bullet {
+  padding: 8px 0;
+  color: var(--cofarsur-text);
 }
 
 /* Tender Detail Styles */

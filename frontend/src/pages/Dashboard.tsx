@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react'
 import TenderTable from '../components/TenderTable'
 import Filters from '../components/Filters'
-import Header from '../components/Header'
 import { getTenders, getDemoTenders, refreshData, Tender, TenderFilters } from '../api/client'
 
 interface DashboardProps {
@@ -103,7 +102,6 @@ export default function Dashboard({ onSelectTender }: DashboardProps) {
 
   return (
     <div className="app-container">
-      <Header />
       <div className="dashboard">
         <div className="dashboard-header">
           <h1>Radar de Licitaciones</h1>

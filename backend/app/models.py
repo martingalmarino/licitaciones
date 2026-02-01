@@ -72,3 +72,39 @@ class SourceRun(Base):
     items_updated = Column(Integer, default=0)
     errors_count = Column(Integer, default=0)
     log_path = Column(String)
+
+
+class RiskAssessment(Base):
+    __tablename__ = "risk_assessments"
+
+    id = Column(String, primary_key=True, default=lambda: str(uuid4()))
+    created_at = Column(DateTime, default=datetime.utcnow)
+
+    institution_type = Column(String)
+    province = Column(String, index=True)
+    modality = Column(String)
+    amount_range = Column(String)
+    days_to_open_range = Column(String)
+
+    category = Column(String)
+    cold_chain = Column(String)
+    traceability_anmat = Column(String)
+    multisite = Column(String)
+    geo_coverage = Column(String)
+
+    documentation_level = Column(String)
+    guarantees = Column(String)
+    payment_terms = Column(String)
+    penalties_sla = Column(String)
+    relationship_history = Column(String)
+
+    risk_total = Column(Integer, index=True)
+    tier = Column(String, index=True)
+    module_scores = Column(Text)
+    top_risks = Column(Text)
+    checklist = Column(Text)
+
+    lead_name = Column(String)
+    lead_role = Column(String)
+    lead_institution = Column(String)
+    lead_email = Column(String)

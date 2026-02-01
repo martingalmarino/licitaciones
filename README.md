@@ -126,6 +126,34 @@ pytest
 pytest --cov=app
 ```
 
+## Simulador de Riesgo
+
+Evaluá en 2 minutos el nivel de riesgo operativo y administrativo de un proceso de compra sanitaria.
+
+### Cómo usar
+
+1. En el portal, haz clic en **Simulador de Riesgo** en el menú.
+2. Click en **Iniciar evaluación**.
+3. Completá el wizard de 3 pasos (datos del proceso, complejidad operativa, condiciones administrativas).
+4. Click en **Calcular riesgo** para ver el resultado.
+5. Descargá el informe PDF y revisá el checklist de mitigación.
+6. Las evaluaciones se guardan y pueden verse en **Ver historial**.
+
+### Descargar PDF
+
+- Desde la página de resultado: click en **Descargar informe PDF**.
+- O desde el historial: abrí una evaluación y descargá el PDF.
+- El archivo se guarda como `cofarsur_riesgo_YYYYMMDD_<id>.pdf`.
+
+### API
+
+- `POST /risk-assessments` — Crear evaluación
+- `GET /risk-assessments` — Listar (filtros: tier, province, modality)
+- `GET /risk-assessments/{id}` — Detalle
+- `GET /risk-assessments/{id}/pdf` — Descargar PDF
+
+---
+
 ## Características Principales
 
 - ✅ Recopilación automática de licitaciones
@@ -137,6 +165,7 @@ pytest --cov=app
 - ✅ Creación automática de carpetas de proceso
 - ✅ API REST completa
 - ✅ Tests unitarios
+- ✅ Simulador de Riesgo (wizard 3 pasos, scoring 0-100, PDF, checklist)
 
 ## Próximos Pasos
 

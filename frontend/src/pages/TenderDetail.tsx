@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react'
 import { getTender, updateTender, createTenderFolder, Tender, TenderUpdate } from '../api/client'
 import ScoreBreakdown from '../components/ScoreBreakdown'
-import Header from '../components/Header'
 
 interface TenderDetailProps {
   tenderId: string
@@ -103,28 +102,15 @@ export default function TenderDetail({ tenderId, initialTender, onClose, onUpdat
 
 
   if (loading) {
-    return (
-      <div className="app-container">
-        <Header />
-        <div className="loading">Cargando...</div>
-      </div>
-    )
+    return <div className="loading">Cargando...</div>
   }
 
   if (!tender) {
-    return (
-      <div className="app-container">
-        <Header />
-        <div className="tender-detail">
-          <div className="empty-state">Licitación no encontrada</div>
-        </div>
-      </div>
-    )
+    return <div className="empty-state">Licitación no encontrada</div>
   }
 
   return (
     <div className="app-container">
-      <Header />
       <div className="tender-detail">
         <div className="tender-detail-header">
           <button className="btn btn-secondary" onClick={onClose}>

@@ -4,7 +4,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.db import init_db, SessionLocal
 from app.models import Tender
-from app.routers import tenders, admin
+from app.routers import tenders, admin, risk
 from app.services.refresh import refresh_all
 
 app = FastAPI(
@@ -44,6 +44,7 @@ async def seed_if_empty():
 # Include routers
 app.include_router(tenders.router)
 app.include_router(admin.router)
+app.include_router(risk.router)
 
 
 @app.get("/health")

@@ -4,5 +4,8 @@
   "outputDirectory": "dist",
   "framework": "vite",
   "installCommand": "npm install",
-  "rootDirectory": "frontend"
+  "rootDirectory": "frontend",
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
 }
