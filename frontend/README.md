@@ -37,6 +37,12 @@ Los archivos compilados estarán en `dist/`
 npm run preview
 ```
 
+### Tests (Panel de Performance)
+
+```bash
+npm run test
+```
+
 ## Variables de Entorno
 
 Crea un archivo `.env` en el directorio `frontend/` con:
@@ -67,6 +73,15 @@ frontend/
 ├── index.html
 └── package.json
 ```
+
+## Panel de Performance
+
+El **Panel de performance de licitaciones** (`/performance`) usa datos de muestra para demo.
+No se conecta a la base de datos ni al backend.
+
+Para editar los datos del dashboard:
+- `src/data/sample_tenders.ts` — licitaciones de ejemplo (60–90 registros)
+- `src/data/sample_status_events.ts` — eventos de cambio de estado (tiempo a primer acción)
 
 ## Características
 

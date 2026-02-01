@@ -5,6 +5,7 @@ import RiskSimulatorLanding from './pages/RiskSimulatorLanding'
 import RiskSimulatorWizard from './pages/RiskSimulatorWizard'
 import RiskSimulatorResult from './pages/RiskSimulatorResult'
 import RiskSimulatorHistory from './pages/RiskSimulatorHistory'
+import Performance from './pages/Performance'
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="/risk-simulator/wizard" element={<RiskSimulatorWizard />} />
         <Route path="/risk-simulator/result/:id" element={<RiskSimulatorResult />} />
         <Route path="/risk-simulator/history" element={<RiskSimulatorHistory />} />
+        <Route path="/performance" element={<Performance />} />
       </Routes>
     </BrowserRouter>
   )
