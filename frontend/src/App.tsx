@@ -10,6 +10,7 @@ function App() {
     return (
       <TenderDetail
         tenderId={selectedTender.id}
+        initialTender={selectedTender}
         onClose={() => setSelectedTender(null)}
         onUpdate={(updated) => setSelectedTender(updated)}
       />

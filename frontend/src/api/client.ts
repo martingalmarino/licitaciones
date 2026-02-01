@@ -101,3 +101,11 @@ export async function createTenderFolder(id: string): Promise<{ success: boolean
     method: 'POST',
   })
 }
+
+/** Datos demo cuando el backend no está disponible (ej: solo frontend en Vercel) */
+export async function getDemoTenders(): Promise<TenderListResponse> {
+  const base = typeof window !== 'undefined' ? window.location.origin : ''
+  const res = await fetch(`${base}/demo-tenders.json`)
+  if (!res.ok) throw new Error('Demo data not found')
+  return res.json()
+}

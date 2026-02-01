@@ -5,26 +5,35 @@ import Header from '../components/Header'
 
 interface TenderDetailProps {
   tenderId: string
+  initialTender?: Tender | null
   onClose: () => void
   onUpdate: (tender: Tender) => void
 }
 
-export default function TenderDetail({ tenderId, onClose, onUpdate }: TenderDetailProps) {
-  const [tender, setTender] = useState<Tender | null>(null)
-  const [loading, setLoading] = useState(true)
+export default function TenderDetail({ tenderId, initialTender, onClose, onUpdate }: TenderDetailProps) {
+  const [tender, setTender] = useState<Tender | null>(initialTender || null)
+  const [loading, setLoading] = useState(!initialTender)
   const [saving, setSaving] = useState(false)
   const [creatingFolder, setCreatingFolder] = useState(false)
   const [formData, setFormData] = useState<TenderUpdate>({
-    status: '',
-    owner: '',
-    notes: '',
+    status: initialTender?.status || '',
+    owner: initialTender?.owner || '',
+    notes: initialTender?.notes || '',
   })
+  const isDemoTender = tenderId.startsWith('demo-')
 
   useEffect(() => {
+    if (initialTender && initialTender.id === tenderId) {
+      setTender(initialTender)
+      setFormData({ status: initialTender.status, owner: initialTender.owner || '', notes: initialTender.notes || '' })
+      setLoading(false)
+      return
+    }
     loadTender()
-  }, [tenderId])
+  }, [tenderId, initialTender?.id])
 
   const loadTender = async () => {
+    if (initialTender?.id === tenderId) return
     setLoading(true)
     try {
       const data = await getTender(tenderId)
@@ -36,7 +45,12 @@ export default function TenderDetail({ tenderId, onClose, onUpdate }: TenderDeta
       })
     } catch (error) {
       console.error('Error loading tender:', error)
-      alert('Error al cargar la licitación')
+      if (initialTender) {
+        setTender(initialTender)
+        setFormData({ status: initialTender.status, owner: initialTender.owner || '', notes: initialTender.notes || '' })
+      } else {
+        alert('Error al cargar la licitación')
+      }
     } finally {
       setLoading(false)
     }
@@ -116,6 +130,9 @@ export default function TenderDetail({ tenderId, onClose, onUpdate }: TenderDeta
           <button className="btn btn-secondary" onClick={onClose}>
             ← Volver
           </button>
+          {isDemoTender && (
+            <div className="demo-banner">Modo demo: datos de ejemplo. Conecte el backend para guardar cambios.</div>
+          )}
           <h1>{tender.title}</h1>
         </div>
 
@@ -233,7 +250,8 @@ export default function TenderDetail({ tenderId, onClose, onUpdate }: TenderDeta
               <button
                 className="btn btn-primary"
                 onClick={handleSave}
-                disabled={saving}
+                disabled={saving || isDemoTender}
+                title={isDemoTender ? 'Requiere backend conectado' : ''}
               >
                 {saving ? 'Guardando...' : 'Guardar Cambios'}
               </button>
@@ -243,7 +261,8 @@ export default function TenderDetail({ tenderId, onClose, onUpdate }: TenderDeta
               <button
                 className="btn btn-secondary"
                 onClick={handleCreateFolder}
-                disabled={creatingFolder}
+                disabled={creatingFolder || isDemoTender}
+                title={isDemoTender ? 'Requiere backend conectado' : ''}
               >
                 {creatingFolder ? 'Creando...' : 'Crear Carpeta de Proceso'}
               </button>
