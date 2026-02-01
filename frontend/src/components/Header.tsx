@@ -9,12 +9,6 @@ export default function Header() {
             <span className="logo-subtitle">Radar de Licitaciones</span>
           </div>
         </div>
-        <nav className="header-nav">
-          <span className="nav-link">Inicio</span>
-          <span className="nav-link">Institucional</span>
-          <span className="nav-link">Sucursales</span>
-          <span className="nav-link">Contacto</span>
-        </nav>
       </div>
     </header>
   )
