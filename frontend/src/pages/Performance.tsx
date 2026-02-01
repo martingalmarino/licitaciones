@@ -94,8 +94,13 @@ export default function Performance() {
         </section>
 
         <div className="perf-legend">
-          <strong>Leyenda de estados:</strong>{' '}
-          Nuevo | En análisis | Descartado | Presentado | Ganado | Perdido
+          <strong>Leyenda de estados:</strong>
+          <span>Nuevo</span>
+          <span>En análisis</span>
+          <span>Descartado</span>
+          <span>Presentado</span>
+          <span>Ganado</span>
+          <span>Perdido</span>
         </div>
       </div>
     </div>

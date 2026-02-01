@@ -10,6 +10,7 @@ export default function ProvinceBarChart({ data }: ProvinceBarChartProps) {
   return (
     <div className="perf-chart-card">
       <h3>Por provincia</h3>
+      <div className="province-chart-subtitle">(total · ganadas)</div>
       <div className="bar-chart-horizontal">
         {data.map((d) => {
           const totalPct = (d.total / maxTotal) * 100
@@ -28,8 +29,8 @@ export default function ProvinceBarChart({ data }: ProvinceBarChartProps) {
                   />
                 </div>
               </div>
-              <span className="province-values">
-                {d.total} total / {d.won} ganadas
+              <span className="province-values" title={`${d.total} total, ${d.won} ganadas`}>
+                {d.total} · {d.won}
               </span>
             </div>
           )

@@ -535,13 +535,15 @@ body {
 }
 
 .status-chip {
-  padding: 8px 14px;
+  padding: 8px 16px;
   border: 2px solid var(--cofarsur-gray);
   border-radius: 8px;
   background: var(--cofarsur-white);
   font-size: 0.88rem;
   cursor: pointer;
   transition: all 0.2s;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .status-chip:hover {
@@ -623,7 +625,7 @@ body {
 
 .perf-charts {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
   gap: 24px;
 }
 
@@ -650,7 +652,9 @@ body {
 
 .bar-chart-vertical .bar-label {
   width: 110px;
+  min-width: 110px;
   font-size: 0.9rem;
+  flex-shrink: 0;
 }
 
 .bar-chart-vertical .bar-track {
@@ -676,9 +680,9 @@ body {
 }
 
 .chart-legend {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 10px 20px;
   margin-top: 16px;
   font-size: 0.8rem;
   color: var(--cofarsur-text-light);
@@ -688,6 +692,8 @@ body {
   display: flex;
   align-items: center;
   gap: 6px;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .legend-dot {
@@ -747,9 +753,16 @@ body {
   margin-bottom: 10px;
 }
 
+.province-chart-subtitle {
+  font-size: 0.75rem;
+  color: var(--cofarsur-text-light);
+  margin-bottom: 12px;
+}
+
 .province-label {
   width: 120px;
   font-size: 0.9rem;
+  flex-shrink: 0;
 }
 
 .province-track {
@@ -778,14 +791,16 @@ body {
 }
 
 .province-values {
-  width: 100px;
+  min-width: 90px;
   font-size: 0.8rem;
   color: var(--cofarsur-text-light);
+  white-space: nowrap;
+  text-align: right;
 }
 
 .perf-tables {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
   gap: 24px;
 }
 
@@ -794,6 +809,20 @@ body {
   padding: 24px;
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.perf-table-card .tender-table-container {
+  overflow-x: auto;
+}
+
+.perf-table-card .tender-table th {
+  white-space: nowrap;
+  min-width: 70px;
+}
+
+.perf-table-card .tender-table th:first-child,
+.perf-table-card .tender-table td.title-cell {
+  min-width: 140px;
 }
 
 .perf-table-card h3 {
@@ -809,6 +838,24 @@ body {
   margin-top: 24px;
   padding-top: 16px;
   border-top: 1px solid var(--cofarsur-gray);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 16px;
+}
+
+.perf-legend strong {
+  margin-right: 8px;
+}
+
+.perf-legend span {
+  white-space: nowrap;
+}
+
+.perf-legend span:not(:last-child)::after {
+  content: '·';
+  margin-left: 8px;
+  color: var(--cofarsur-gray-dark);
 }
 
 @media (max-width: 640px) {
