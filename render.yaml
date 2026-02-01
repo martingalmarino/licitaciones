@@ -1,0 +1,20 @@
+# Blueprint para Render.com
+# https://dashboard.render.com -> New -> Blueprint
+# Conectar repo: https://github.com/martingalmarino/licitaciones
+services:
+  - type: web
+    name: cofarsur-tender-api
+    runtime: python
+    region: oregon
+    plan: free
+
+    rootDir: backend
+
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+
+    envVars:
+      - key: CORS_ALLOW_ALL
+        value: "1"
+      - key: PYTHON_VERSION
+        value: "3.11.0"

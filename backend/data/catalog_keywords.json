@@ -1,0 +1,79 @@
+{
+  "oncology": [
+    "oncológico",
+    "oncológica",
+    "cáncer",
+    "quimioterapia",
+    "radioterapia",
+    "tumor",
+    "metástasis",
+    "carcinoma",
+    "linfoma",
+    "leucemia"
+  ],
+  "high_cost": [
+    "alto costo",
+    "altocosto",
+    "medicamento de alto costo",
+    "tratamiento de alto costo",
+    "terapia biológica",
+    "bioterapia",
+    "medicamento huérfano"
+  ],
+  "hospital_supply": [
+    "insumos hospitalarios",
+    "material descartable",
+    "guantes",
+    "jeringas",
+    "agujas",
+    "sueros",
+    "solución fisiológica",
+    "material de curación"
+  ],
+  "critical_meds": [
+    "medicamento crítico",
+    "uso compasivo",
+    "medicamento esencial",
+    "emergencia",
+    "urgencia",
+    "vida o muerte"
+  ],
+  "cold_chain": [
+    "cadena de frío",
+    "refrigeración",
+    "conservación",
+    "temperatura controlada",
+    "frigorífico",
+    "vacuna",
+    "insulina"
+  ],
+  "traceability": [
+    "trazabilidad",
+    "trazable",
+    "lote",
+    "serie",
+    "trazado",
+    "seguimiento"
+  ],
+  "anmat": [
+    "anmat",
+    "registro nacional",
+    "rnpa",
+    "certificado anmat",
+    "habilitación anmat"
+  ],
+  "import": [
+    "importación",
+    "importado",
+    "procedencia extranjera",
+    "aduana",
+    "despacho aduanero"
+  ],
+  "consolidated": [
+    "consolidada",
+    "consolidación",
+    "multisede",
+    "múltiples sedes",
+    "centralizada"
+  ]
+}

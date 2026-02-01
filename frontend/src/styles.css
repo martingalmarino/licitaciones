@@ -1,0 +1,633 @@
+/* Cofarsur Brand Colors */
+:root {
+  --cofarsur-blue-dark: #1a3a5f;
+  --cofarsur-blue: #2c5aa0;
+  --cofarsur-blue-light: #4a7bc8;
+  --cofarsur-pink: #e91e63;
+  --cofarsur-pink-light: #f48fb1;
+  --cofarsur-green: #4caf50;
+  --cofarsur-green-light: #81c784;
+  --cofarsur-purple: #9c27b0;
+  --cofarsur-gray-light: #f5f5f5;
+  --cofarsur-gray: #e0e0e0;
+  --cofarsur-gray-dark: #757575;
+  --cofarsur-white: #ffffff;
+  --cofarsur-text: #333333;
+  --cofarsur-text-light: #666666;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--cofarsur-gray-light);
+  color: var(--cofarsur-text);
+}
+
+/* Header Styles - Cofarsur Brand */
+.cofarsur-header {
+  background-color: var(--cofarsur-white);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  padding: 15px 0;
+}
+
+.header-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo-section {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.logo-icon {
+  width: 50px;
+  height: 50px;
+  background: linear-gradient(135deg, var(--cofarsur-blue-dark) 0%, var(--cofarsur-blue) 100%);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--cofarsur-white);
+  font-size: 28px;
+  font-weight: 700;
+  font-family: 'Arial', sans-serif;
+}
+
+.logo-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.logo-main {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--cofarsur-blue-dark);
+  letter-spacing: 0.5px;
+}
+
+.logo-subtitle {
+  font-size: 12px;
+  color: var(--cofarsur-text-light);
+  font-weight: 500;
+}
+
+.header-nav {
+  display: flex;
+  gap: 30px;
+  align-items: center;
+}
+
+.nav-link {
+  color: var(--cofarsur-text);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 15px;
+  transition: color 0.2s;
+  cursor: pointer;
+}
+
+.nav-link:hover {
+  color: var(--cofarsur-blue);
+}
+
+.app-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.dashboard {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 30px 20px;
+  flex: 1;
+}
+
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid var(--cofarsur-gray);
+}
+
+.dashboard-header h1 {
+  font-size: 2.2rem;
+  color: var(--cofarsur-blue-dark);
+  font-weight: 700;
+}
+
+.filters {
+  background: var(--cofarsur-white);
+  padding: 25px;
+  border-radius: 12px;
+  margin-bottom: 25px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.filters-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.filter-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.filter-group label {
+  font-weight: 600;
+  margin-bottom: 8px;
+  font-size: 0.9rem;
+  color: var(--cofarsur-blue-dark);
+}
+
+.filter-group input,
+.filter-group select {
+  padding: 10px 14px;
+  border: 2px solid var(--cofarsur-gray);
+  border-radius: 6px;
+  font-size: 0.95rem;
+  transition: border-color 0.2s;
+}
+
+.filter-group input:focus,
+.filter-group select:focus {
+  outline: none;
+  border-color: var(--cofarsur-blue);
+}
+
+.results-info {
+  margin-bottom: 15px;
+  color: var(--cofarsur-text-light);
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.tender-table-container {
+  background: var(--cofarsur-white);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.tender-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.tender-table thead {
+  background: linear-gradient(135deg, var(--cofarsur-blue-dark) 0%, var(--cofarsur-blue) 100%);
+  color: var(--cofarsur-white);
+}
+
+.tender-table th {
+  padding: 16px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 0.9rem;
+  letter-spacing: 0.3px;
+}
+
+.tender-table td {
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--cofarsur-gray);
+}
+
+.tender-row {
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.tender-row:hover {
+  background-color: #f8f9fa;
+}
+
+.tender-row:last-child td {
+  border-bottom: none;
+}
+
+.title-cell {
+  max-width: 300px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: 500;
+}
+
+.score-cell {
+  font-weight: 700;
+  color: var(--cofarsur-blue-dark);
+  font-size: 1.1rem;
+}
+
+.badge {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.badge-high {
+  background: linear-gradient(135deg, #e91e63 0%, #c2185b 100%);
+  color: white;
+}
+
+.badge-medium {
+  background: linear-gradient(135deg, #ff9800 0%, #f57c00 100%);
+  color: white;
+}
+
+.badge-low {
+  background: linear-gradient(135deg, #9e9e9e 0%, #757575 100%);
+  color: white;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 60px 40px;
+  color: var(--cofarsur-text-light);
+  font-size: 1.1rem;
+}
+
+.loading {
+  text-align: center;
+  padding: 60px 40px;
+  font-size: 1.2rem;
+  color: var(--cofarsur-text-light);
+}
+
+.btn {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  letter-spacing: 0.3px;
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--cofarsur-blue-dark) 0%, var(--cofarsur-blue) 100%);
+  color: var(--cofarsur-white);
+  box-shadow: 0 2px 6px rgba(26, 58, 95, 0.3);
+}
+
+.btn-primary:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(26, 58, 95, 0.4);
+}
+
+.btn-secondary {
+  background-color: var(--cofarsur-gray-dark);
+  color: var(--cofarsur-white);
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background-color: #616161;
+}
+
+/* Tender Detail Styles */
+.tender-detail {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 30px 20px;
+  flex: 1;
+}
+
+.tender-detail-header {
+  margin-bottom: 30px;
+}
+
+.tender-detail-header h1 {
+  font-size: 1.9rem;
+  color: var(--cofarsur-blue-dark);
+  margin-top: 15px;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.tender-detail-content {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 30px;
+}
+
+.tender-info-section,
+.tender-scoring-section,
+.tender-actions-section {
+  background: var(--cofarsur-white);
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  margin-bottom: 20px;
+}
+
+.tender-info-section h2,
+.tender-scoring-section h2,
+.tender-actions-section h2 {
+  font-size: 1.4rem;
+  color: var(--cofarsur-blue-dark);
+  margin-bottom: 25px;
+  padding-bottom: 15px;
+  border-bottom: 3px solid var(--cofarsur-gray);
+  font-weight: 700;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.info-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.info-item label {
+  font-weight: 600;
+  color: var(--cofarsur-blue-dark);
+  margin-bottom: 8px;
+  font-size: 0.9rem;
+}
+
+.info-item span,
+.info-item p {
+  color: var(--cofarsur-text);
+  font-size: 0.95rem;
+}
+
+.info-item.description {
+  grid-column: 1 / -1;
+}
+
+.info-item.description p {
+  line-height: 1.7;
+  margin-top: 8px;
+}
+
+.info-item a {
+  color: var(--cofarsur-blue);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.info-item a:hover {
+  text-decoration: underline;
+}
+
+.score-display {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  margin-bottom: 30px;
+  padding: 20px;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border-radius: 12px;
+}
+
+.score-total {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.score-value {
+  font-size: 3.5rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--cofarsur-blue-dark) 0%, var(--cofarsur-blue) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.score-max {
+  font-size: 1.8rem;
+  color: var(--cofarsur-text-light);
+  font-weight: 600;
+}
+
+.priority-badge {
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.priority-badge.badge-high {
+  background: linear-gradient(135deg, var(--cofarsur-pink) 0%, #c2185b 100%);
+  color: white;
+}
+
+.priority-badge.badge-medium {
+  background: linear-gradient(135deg, #ff9800 0%, #f57c00 100%);
+  color: white;
+}
+
+.priority-badge.badge-low {
+  background: linear-gradient(135deg, #9e9e9e 0%, #757575 100%);
+  color: white;
+}
+
+.score-breakdown {
+  margin-top: 25px;
+}
+
+.score-breakdown h3 {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+  color: var(--cofarsur-blue-dark);
+  font-weight: 700;
+}
+
+.breakdown-list {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.breakdown-item {
+  padding: 18px;
+  background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+  border-radius: 8px;
+  border-left: 4px solid var(--cofarsur-blue);
+}
+
+.breakdown-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.breakdown-label {
+  font-weight: 600;
+  color: var(--cofarsur-blue-dark);
+  font-size: 0.95rem;
+}
+
+.breakdown-score {
+  font-weight: 700;
+  color: var(--cofarsur-blue);
+  font-size: 1rem;
+}
+
+.breakdown-bar {
+  height: 10px;
+  background-color: var(--cofarsur-gray);
+  border-radius: 5px;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+.breakdown-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--cofarsur-blue) 0%, var(--cofarsur-blue-light) 100%);
+  transition: width 0.3s;
+}
+
+.breakdown-details {
+  font-size: 0.85rem;
+  color: var(--cofarsur-text-light);
+  margin-top: 10px;
+}
+
+.detail-item {
+  margin: 4px 0;
+}
+
+.breakdown-total {
+  margin-top: 25px;
+  padding-top: 20px;
+  border-top: 3px solid var(--cofarsur-gray);
+  font-size: 1.2rem;
+  color: var(--cofarsur-blue-dark);
+  font-weight: 700;
+}
+
+.form-group {
+  margin-bottom: 25px;
+}
+
+.form-group label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: var(--cofarsur-blue-dark);
+  font-size: 0.95rem;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid var(--cofarsur-gray);
+  border-radius: 6px;
+  font-size: 0.95rem;
+  font-family: inherit;
+  transition: border-color 0.2s;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--cofarsur-blue);
+}
+
+.form-group textarea {
+  resize: vertical;
+}
+
+.form-actions {
+  margin-top: 25px;
+}
+
+.form-actions .btn {
+  width: 100%;
+}
+
+@media (max-width: 1024px) {
+  .tender-detail-content {
+    grid-template-columns: 1fr;
+  }
+
+  .info-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .header-nav {
+    gap: 15px;
+  }
+
+  .nav-link {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 768px) {
+  .filters-row {
+    grid-template-columns: 1fr;
+  }
+
+  .tender-table {
+    font-size: 0.85rem;
+  }
+
+  .tender-table th,
+  .tender-table td {
+    padding: 10px;
+  }
+
+  .header-container {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .header-nav {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .logo-main {
+    font-size: 16px;
+  }
+
+  .dashboard-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+}

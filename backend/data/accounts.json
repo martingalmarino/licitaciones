@@ -1,0 +1,34 @@
+{
+  "Hospital Rawson": {
+    "relationship": "habitual",
+    "province": "Córdoba"
+  },
+  "Hospital de Clínicas": {
+    "relationship": "habitual",
+    "province": "Buenos Aires"
+  },
+  "Hospital Italiano": {
+    "relationship": "habitual",
+    "province": "Buenos Aires"
+  },
+  "Ministerio de Salud de la Nación": {
+    "relationship": "habitual",
+    "province": "Buenos Aires"
+  },
+  "Hospital Alemán": {
+    "relationship": "occasional",
+    "province": "Buenos Aires"
+  },
+  "Hospital Británico": {
+    "relationship": "occasional",
+    "province": "Buenos Aires"
+  },
+  "Hospital Garrahan": {
+    "relationship": "habitual",
+    "province": "Buenos Aires"
+  },
+  "Hospital de Niños": {
+    "relationship": "occasional",
+    "province": "Córdoba"
+  }
+}
